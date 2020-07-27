@@ -9,9 +9,8 @@ MASSE_VOL_HYDROGENE = 0.082 # kg/m3
 COEF_PENETRATION_AEROSTAT = 0.04 #
 
 # Valeurs par défaut pour les paramètres variables
-_charge_utile = 2500 #215000. # kg
-_ratio = 4
-_nbre_moteurs = 4
+_charge_utile = 1.5 #215000. # kg
+_ratio = 3
 
 # Valeurs globales
 _surface_penetrante = 0
@@ -146,7 +145,7 @@ def courbes_portance():
         densite_hy = get_densite_hy(pression_air, temperature)
         portance = densite_air - densite_hy
         nouveau_vol = MASSE_VOL_HYDROGENE / densite_hy
-        courbe_portance[1].append(get_portance(altitude)*nouveau_vol)
+        courbe_portance[1].append(portance*nouveau_vol)
 
     plot1 = plt.figure(1)
     plt.plot(courbe_portance[0], courbe_portance[1], 'g-')
@@ -170,7 +169,7 @@ def courbes_portance():
     plot1 = plt.figure(2)
     plt.plot(courbe_portance[0], courbe_portance[1], 'g-')
     #plt.xlim(.2, 1)
-    #plt.ylim(0, 10000)
+    plt.xlim(0, 10000)
     plt.xticks(np.arange(0, 10000, step=500))
     #plt.xticks(np.arange(0.2, 1.0, step=.1))
     plt.grid(color='#AAAAAA', linestyle='-', linewidth=1)
@@ -200,10 +199,10 @@ def courbes_ratio_volume_diametre():
 
 def show_courbes():
     courbes_altitude_energie()
-    #courbes_pression_densite()
-    #courbes_portance()
-    #courbes_ratio_volume_diametre()
+    courbes_pression_densite()
+    courbes_portance()
+    courbes_ratio_volume_diametre()
 
 
 main()
-show_courbes()
+#show_courbes()
